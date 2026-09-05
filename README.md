@@ -1,0 +1,1 @@
+# ai-password-strength-detector
