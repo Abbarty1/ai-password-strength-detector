@@ -4,7 +4,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 # =========================================================
-# PAGE CONFIGURATION
+# PAGE SETTINGS
 # =========================================================
 
 st.set_page_config(
@@ -15,177 +15,327 @@ st.set_page_config(
 
 
 # =========================================================
-# CUSTOM DESIGN
+# CUSTOM CSS
 # =========================================================
 
-st.markdown("""
+st.html("""
 <style>
 
-    /* Main background */
-    .stApp {
-        background: #f5f7fb;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-    /* Remove default top spacing */
-    .block-container {
-        padding-top: 0rem;
-        padding-bottom: 2rem;
-        max-width: 1200px;
-    }
+* {
+    font-family: 'Inter', sans-serif;
+}
 
-    /* HERO SECTION */
+.stApp {
+    background: #f5f7fc;
+}
+
+.block-container {
+    max-width: 1250px;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+/* HERO */
+
+.hero {
+    background:
+        radial-gradient(circle at 82% 50%, rgba(139,92,246,0.35), transparent 25%),
+        linear-gradient(135deg, #050a2d, #11164b 55%, #25105a);
+
+    border-radius: 0 0 32px 32px;
+    padding: 45px 55px;
+    color: white;
+    min-height: 390px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border: 1px solid rgba(139,92,246,0.2);
+    border-radius: 50%;
+    right: 80px;
+    top: 20px;
+}
+
+.hero-brand {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+
+.hero-title {
+    font-size: 52px;
+    line-height: 1.05;
+    font-weight: 800;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title span {
+    color: #a855f7;
+}
+
+.hero-text {
+    color: #cbd5e1;
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 560px;
+}
+
+.ai-badge {
+    position: absolute;
+    right: 45px;
+    top: 35px;
+    border: 1px solid #8b5cf6;
+    background: rgba(139,92,246,0.12);
+    padding: 10px 18px;
+    border-radius: 30px;
+    color: #d8b4fe;
+    font-weight: 600;
+}
+
+.lock {
+    position: absolute;
+    right: 140px;
+    top: 115px;
+    font-size: 145px;
+    filter: drop-shadow(0 0 35px #8b5cf6);
+}
+
+/* CARDS */
+
+.card {
+    background: white;
+    border: 1px solid #e7ebf3;
+    border-radius: 22px;
+    padding: 26px;
+    margin-top: 22px;
+    box-shadow: 0 10px 35px rgba(15,23,42,0.06);
+}
+
+.card-title {
+    color: #111827;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+/* RESULT */
+
+.result-card {
+    background: white;
+    border: 1px solid #e7ebf3;
+    border-radius: 22px;
+    padding: 28px;
+    margin-top: 22px;
+    box-shadow: 0 10px 35px rgba(15,23,42,0.06);
+}
+
+.result-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #17203a;
+    margin-bottom: 15px;
+}
+
+.weak {
+    color: #dc2626;
+    font-size: 35px;
+    font-weight: 800;
+}
+
+.medium {
+    color: #d97706;
+    font-size: 35px;
+    font-weight: 800;
+}
+
+.strong {
+    color: #16a34a;
+    font-size: 35px;
+    font-weight: 800;
+}
+
+.confidence {
+    font-size: 42px;
+    font-weight: 800;
+    color: #17203a;
+}
+
+.description {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* METRICS */
+
+.metric {
+    background: white;
+    border: 1px solid #e7ebf3;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    min-height: 125px;
+    box-shadow: 0 5px 20px rgba(15,23,42,0.04);
+}
+
+.metric-icon {
+    font-size: 25px;
+}
+
+.metric-number {
+    font-size: 27px;
+    font-weight: 800;
+    color: #17203a;
+    margin-top: 5px;
+}
+
+.metric-label {
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* INFORMATION */
+
+.info-card {
+    background: white;
+    border: 1px solid #e7ebf3;
+    border-radius: 22px;
+    padding: 25px;
+    margin-top: 22px;
+    box-shadow: 0 10px 35px rgba(15,23,42,0.05);
+}
+
+.info-title {
+    color: #17203a;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.info-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #eef1f5;
+    color: #334155;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+/* FOOTER */
+
+.footer {
+    margin-top: 30px;
+    padding: 25px;
+    border-radius: 20px;
+    background: #070d2c;
+    color: white;
+    text-align: center;
+}
+
+.footer-small {
+    color: #94a3b8;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+/* STREAMLIT BUTTON */
+
+.stButton > button {
+    width: 100%;
+    height: 52px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.stButton > button:hover {
+    border: none;
+    color: white;
+    background: linear-gradient(90deg, #7c3aed, #2563eb);
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
     .hero {
-        background: linear-gradient(
-            135deg,
-            #050b2c 0%,
-            #11154d 50%,
-            #24105a 100%
-        );
-
-        padding: 45px 45px 50px 45px;
-        border-radius: 0 0 30px 30px;
-        color: white;
-        margin-bottom: 30px;
-    }
-
-    .brand {
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 45px;
-    }
-
-    .brand-icon {
-        font-size: 30px;
-        vertical-align: middle;
-        margin-right: 10px;
+        padding: 30px 25px;
+        min-height: 420px;
     }
 
     .hero-title {
-        font-size: 48px;
-        font-weight: 800;
-        line-height: 1.05;
-        margin-bottom: 18px;
+        font-size: 38px;
     }
 
-    .hero-title span {
-        color: #a855f7;
-    }
-
-    .hero-description {
-        font-size: 18px;
-        color: #d8dcf0;
-        max-width: 600px;
-        line-height: 1.6;
+    .hero-text {
+        font-size: 15px;
     }
 
     .ai-badge {
-        background: rgba(168, 85, 247, 0.12);
-        border: 1px solid #8b5cf6;
-        border-radius: 20px;
-        padding: 10px 18px;
+        position: static;
         display: inline-block;
-        color: #d8b4fe;
-        font-weight: 600;
         margin-bottom: 25px;
     }
 
-    /* Cards */
-    .card {
-        background: white;
-        border-radius: 20px;
-        padding: 25px;
-        box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
-        border: 1px solid #e9edf5;
-        margin-bottom: 20px;
+    .hero-brand {
+        margin-bottom: 25px;
     }
 
-    .section-title {
-        font-size: 20px;
-        font-weight: 700;
-        color: #17203a;
-        margin-bottom: 18px;
+    .lock {
+        right: 25px;
+        bottom: 20px;
+        top: auto;
+        font-size: 90px;
     }
-
-    /* Metric cards */
-    .metric-card {
-        background: white;
-        border-radius: 18px;
-        padding: 22px;
-        text-align: center;
-        border: 1px solid #e8ecf4;
-        min-height: 145px;
-    }
-
-    .metric-icon {
-        font-size: 28px;
-        margin-bottom: 10px;
-    }
-
-    .metric-number {
-        font-size: 30px;
-        font-weight: 800;
-        color: #17203a;
-    }
-
-    .metric-label {
-        color: #64748b;
-        font-size: 14px;
-    }
-
-    /* Security tips */
-    .tip {
-        padding: 13px 0;
-        border-bottom: 1px solid #edf0f5;
-        color: #334155;
-    }
-
-    .tip:last-child {
-        border-bottom: none;
-    }
-
-    /* Footer */
-    .footer {
-        background: #070d2c;
-        color: white;
-        padding: 25px;
-        border-radius: 20px;
-        margin-top: 25px;
-        text-align: center;
-    }
-
-    .footer-small {
-        color: #9ca8c5;
-        font-size: 13px;
-        margin-top: 5px;
-    }
-
-    /* Streamlit input */
-    div[data-baseweb="input"] {
-        border-radius: 12px;
-    }
-
-    /* Button */
-    .stButton > button {
-        width: 100%;
-        border-radius: 12px;
-        height: 52px;
-        font-size: 17px;
-        font-weight: 700;
-        background: linear-gradient(
-            90deg,
-            #8b5cf6,
-            #3b82f6
-        );
-        color: white;
-        border: none;
-    }
-
-    .stButton > button:hover {
-        opacity: 0.9;
-    }
+}
 
 </style>
-""", unsafe_allow_html=True)
+""")
+
+
+# =========================================================
+# HERO SECTION
+# =========================================================
+
+st.html("""
+<div class="hero">
+
+    <div class="hero-brand">
+        🔐 &nbsp; AI Password Strength Detector
+    </div>
+
+    <div class="ai-badge">
+        🤖 Powered by Machine Learning
+    </div>
+
+    <div class="hero-title">
+        AI Password<br>
+        <span>Strength Detector</span>
+    </div>
+
+    <div class="hero-text">
+        Our machine learning model analyzes password
+        characteristics and predicts their strength.
+    </div>
+
+    <div class="lock">
+        🔒
+    </div>
+
+</div>
+""")
 
 
 # =========================================================
@@ -261,7 +411,7 @@ model.fit(X, y)
 
 
 # =========================================================
-# PASSWORD FEATURE EXTRACTION
+# FEATURE EXTRACTION
 # =========================================================
 
 def analyze_password(password):
@@ -294,62 +444,23 @@ def analyze_password(password):
 
 
 # =========================================================
-# HERO SECTION
+# PASSWORD INPUT CARD
 # =========================================================
 
-st.markdown("""
-<div class="hero">
-
-    <div class="brand">
-        <span class="brand-icon">🔐</span>
-        AI Password Strength Detector
-    </div>
-
-    <div class="ai-badge">
-        🤖 Powered by Machine Learning
-    </div>
-
-    <div class="hero-title">
-        AI Password<br>
-        <span>Strength Detector</span>
-    </div>
-
-    <div class="hero-description">
-        Our machine learning model analyzes password
-        characteristics and predicts their strength.
-    </div>
-
-</div>
-""", unsafe_allow_html=True)
-
-
-# =========================================================
-# PASSWORD INPUT
-# =========================================================
-
-st.markdown("""
+st.html("""
 <div class="card">
-    <div class="section-title">
+    <div class="card-title">
         🔑 Check Your Password
     </div>
 </div>
-""", unsafe_allow_html=True)
+""")
+
 
 password = st.text_input(
     "Enter a test password:",
     type="password",
     placeholder="Enter your password here..."
 )
-
-show_password = st.checkbox("Show password")
-
-if show_password:
-    password = st.text_input(
-        "Password",
-        value=password,
-        type="default"
-    )
-
 
 st.caption(
     "⚠️ For demonstration only. Do not enter your real password."
@@ -379,235 +490,236 @@ if check:
         confidence = max(probabilities) * 100
 
 
-        # =================================================
+        # ================================================
         # RESULT
-        # =================================================
-
-        st.markdown(
-            '<div class="card"><div class="section-title">'
-            '📊 Overall Strength</div>',
-            unsafe_allow_html=True
-        )
+        # ================================================
 
         if prediction == "Weak":
 
-            st.error("🔴 WEAK PASSWORD")
-            message = (
-                "This password needs improvement."
-            )
+            result_class = "weak"
+            icon = "🔴"
+            message = "This password needs improvement."
 
         elif prediction == "Medium":
 
-            st.warning("🟡 MEDIUM PASSWORD")
-            message = (
-                "This password has moderate strength."
-            )
+            result_class = "medium"
+            icon = "🟡"
+            message = "This password has moderate strength."
 
         else:
 
-            st.success("🟢 STRONG PASSWORD")
-            message = (
-                "This password has a strong combination "
-                "of characters."
-            )
-
-        st.write(message)
-
-        st.progress(min(confidence / 100, 1.0))
-
-        st.write(
-            f"**AI Prediction Confidence: "
-            f"{confidence:.1f}%**"
-        )
-
-        st.markdown("</div>", unsafe_allow_html=True)
+            result_class = "strong"
+            icon = "🟢"
+            message = "This password has a strong combination of characters."
 
 
-        # =================================================
+        st.html(f"""
+        <div class="result-card">
+
+            <div class="result-title">
+                🛡️ Overall Strength
+            </div>
+
+            <div class="{result_class}">
+                {icon} {prediction.upper()}
+            </div>
+
+            <p class="description">
+                {message}
+            </p>
+
+            <hr>
+
+            <div class="result-title">
+                🤖 AI Prediction Confidence
+            </div>
+
+            <div class="confidence">
+                {confidence:.1f}%
+            </div>
+
+            <p class="description">
+                Confidence calculated from the machine-learning model.
+            </p>
+
+        </div>
+        """)
+
+
+        # ================================================
         # PASSWORD ANALYSIS
-        # =================================================
+        # ================================================
 
-        st.markdown(
-            '<div class="card"><div class="section-title">'
-            '📈 Password Analysis</div>',
-            unsafe_allow_html=True
-        )
-
-        col1, col2, col3, col4, col5 = st.columns(5)
-
-        metrics = [
-            ("🔢", features[0], "Length"),
-            ("⬆️", features[1], "Uppercase"),
-            ("🔤", features[2], "Lowercase"),
-            ("🔢", features[3], "Numbers"),
-            ("@#", features[4], "Special Characters")
-        ]
-
-        columns = [
-            col1, col2, col3, col4, col5
-        ]
-
-        for column, metric in zip(columns, metrics):
-
-            icon, number, label = metric
-
-            with column:
-
-                st.markdown(
-                    f"""
-                    <div class="metric-card">
-                        <div class="metric-icon">
-                            {icon}
-                        </div>
-
-                        <div class="metric-number">
-                            {number}
-                        </div>
-
-                        <div class="metric-label">
-                            {label}
-                        </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-        st.markdown("</div>", unsafe_allow_html=True)
+        st.html("""
+        <div class="card-title" style="margin-top:30px;">
+            📊 Password Analysis
+        </div>
+        """)
 
 
-        # =================================================
+        metric_html = f"""
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(5, 1fr);
+            gap:15px;
+        ">
+
+            <div class="metric">
+                <div class="metric-icon">🔢</div>
+                <div class="metric-number">{features[0]}</div>
+                <div class="metric-label">Length</div>
+            </div>
+
+            <div class="metric">
+                <div class="metric-icon">⬆️</div>
+                <div class="metric-number">{features[1]}</div>
+                <div class="metric-label">Uppercase</div>
+            </div>
+
+            <div class="metric">
+                <div class="metric-icon">🔤</div>
+                <div class="metric-number">{features[2]}</div>
+                <div class="metric-label">Lowercase</div>
+            </div>
+
+            <div class="metric">
+                <div class="metric-icon">123</div>
+                <div class="metric-number">{features[3]}</div>
+                <div class="metric-label">Numbers</div>
+            </div>
+
+            <div class="metric">
+                <div class="metric-icon">@#</div>
+                <div class="metric-number">{features[4]}</div>
+                <div class="metric-label">Special Characters</div>
+            </div>
+
+        </div>
+        """
+
+        st.html(metric_html)
+
+
+        # ================================================
         # RECOMMENDATIONS
-        # =================================================
+        # ================================================
 
-        col1, col2 = st.columns(2)
+        recommendations = []
 
-
-        with col1:
-
-            st.markdown(
-                '<div class="card">'
-                '<div class="section-title">'
-                '🛡️ Security Recommendations'
-                '</div>',
-                unsafe_allow_html=True
+        if features[0] >= 8:
+            recommendations.append(
+                "✅ Password length is good."
+            )
+        else:
+            recommendations.append(
+                "❌ Use at least 8 characters."
             )
 
-            recommendations = []
-
-            if features[0] < 8:
-                recommendations.append(
-                    "❌ Use at least 8 characters."
-                )
-            else:
-                recommendations.append(
-                    "✅ Password length is good."
-                )
-
-            if features[1] == 0:
-                recommendations.append(
-                    "❌ Add uppercase letters."
-                )
-            else:
-                recommendations.append(
-                    "✅ Contains uppercase letters."
-                )
-
-            if features[2] == 0:
-                recommendations.append(
-                    "❌ Add lowercase letters."
-                )
-            else:
-                recommendations.append(
-                    "✅ Contains lowercase letters."
-                )
-
-            if features[3] == 0:
-                recommendations.append(
-                    "❌ Add numbers."
-                )
-            else:
-                recommendations.append(
-                    "✅ Contains numbers."
-                )
-
-            if features[4] == 0:
-                recommendations.append(
-                    "❌ Add special characters."
-                )
-            else:
-                recommendations.append(
-                    "✅ Contains special characters."
-                )
-
-            for item in recommendations:
-
-                st.markdown(
-                    f'<div class="tip">{item}</div>',
-                    unsafe_allow_html=True
-                )
-
-            st.markdown("</div>", unsafe_allow_html=True)
-
-
-        # =================================================
-        # PASSWORD TIPS
-        # =================================================
-
-        with col2:
-
-            st.markdown(
-                '<div class="card">'
-                '<div class="section-title">'
-                '💡 Tips for Strong Passwords'
-                '</div>',
-                unsafe_allow_html=True
+        if features[1] > 0:
+            recommendations.append(
+                "✅ Contains uppercase letters."
+            )
+        else:
+            recommendations.append(
+                "❌ Add uppercase letters."
             )
 
-            tips = [
-                (
-                    "🔐",
-                    "Use longer passwords",
-                    "Aim for 12 or more characters."
-                ),
-                (
-                    "🔢",
-                    "Mix character types",
-                    "Use letters, numbers and symbols."
-                ),
-                (
-                    "⚠️",
-                    "Avoid common patterns",
-                    "Avoid simple words and sequences."
-                ),
-                (
-                    "✨",
-                    "Make it unique",
-                    "Don't reuse the same password."
-                )
-            ]
+        if features[2] > 0:
+            recommendations.append(
+                "✅ Contains lowercase letters."
+            )
+        else:
+            recommendations.append(
+                "❌ Add lowercase letters."
+            )
 
-            for icon, title, description in tips:
+        if features[3] > 0:
+            recommendations.append(
+                "✅ Contains numbers."
+            )
+        else:
+            recommendations.append(
+                "❌ Add numbers."
+            )
 
-                st.markdown(
-                    f"""
-                    <div class="tip">
-                        <b>{icon} {title}</b><br>
-                        <span style="color:#64748b;">
-                        {description}
-                        </span>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+        if features[4] > 0:
+            recommendations.append(
+                "✅ Contains special characters."
+            )
+        else:
+            recommendations.append(
+                "❌ Add special characters."
+            )
 
-            st.markdown("</div>", unsafe_allow_html=True)
+
+        recommendation_html = ""
+
+        for item in recommendations:
+
+            recommendation_html += f"""
+            <div class="info-item">
+                {item}
+            </div>
+            """
+
+
+        # ================================================
+        # TIPS
+        # ================================================
+
+        tips_html = """
+        <div class="info-card">
+
+            <div class="info-title">
+                💡 Tips for Strong Passwords
+            </div>
+
+            <div class="info-item">
+                🔐 <b>Use longer passwords</b><br>
+                Use 12 or more characters when possible.
+            </div>
+
+            <div class="info-item">
+                🔢 <b>Mix character types</b><br>
+                Combine uppercase, lowercase, numbers and symbols.
+            </div>
+
+            <div class="info-item">
+                ⚠️ <b>Avoid common patterns</b><br>
+                Avoid simple words, names and repeated sequences.
+            </div>
+
+            <div class="info-item">
+                ✨ <b>Make it unique</b><br>
+                Avoid reusing the same password on different accounts.
+            </div>
+
+        </div>
+        """
+
+
+        left_column = f"""
+        <div class="info-card">
+
+            <div class="info-title">
+                🛡️ Security Recommendations
+            </div>
+
+            {recommendation_html}
+
+        </div>
+        """
+
+        st.html(left_column)
+
+        st.html(tips_html)
 
 
 # =========================================================
 # FOOTER
 # =========================================================
 
-st.markdown("""
+st.html("""
 <div class="footer">
 
     🔐 <b>AI Password Strength Detector</b>
@@ -617,8 +729,8 @@ st.markdown("""
     </div>
 
     <div class="footer-small">
-        Educational cybersecurity project
+        Educational Cybersecurity Project
     </div>
 
 </div>
-""", unsafe_allow_html=True)
+""")
